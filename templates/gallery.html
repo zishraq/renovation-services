@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gallery - Our Work Portfolio{% endblock %}
+
+{% block content %}
+<div class="gallery-header" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/media/projects/gallery/frame-construction.jpg') center/cover;">
+    <div class="container py-5 mt-5 text-center text-white">
+        <h1 class="display-4 fw-bold">Our Work Gallery</h1>
+        <p class="lead">Real projects. Real results. Real craftsmanship.</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row g-4">
+        <!-- All your actual construction images -->
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/ceiling-grid-1.jpg" alt="Ceiling Grid Work" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Ceiling Grid System</h5>
+                    <p>Commercial office installation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/dome-ceiling.jpg" alt="Custom Dome" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Architectural Dome</h5>
+                    <p>Custom ceiling feature</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/drywall-framing.jpg" alt="Framing Work" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Metal Framing</h5>
+                    <p>With insulation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/sports-wall.jpg" alt="Sports Facility" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Sports Complex</h5>
+                    <p>Complete renovation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/bathroom-ceiling.jpg" alt="Bathroom Ceiling" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Bathroom Ceiling</h5>
+                    <p>Moisture-resistant installation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/finished-ceiling.jpg" alt="Finished Ceiling" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Modern Ceiling</h5>
+                    <p>Curved design elements</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/warehouse-framing.jpg" alt="Warehouse" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Warehouse Project</h5>
+                    <p>Large scale construction</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/hallway-finished.jpg" alt="Finished Hallway" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Completed Hallway</h5>
+                    <p>Professional finish</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="gallery-image">
+                <img src="/media/projects/gallery/ceiling-frame-detail.jpg" alt="Frame Detail" class="img-fluid">
+                <div class="image-caption">
+                    <h5>Precision Framing</h5>
+                    <p>Attention to detail</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.gallery-header {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+}
+
+.gallery-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.gallery-image:hover img {
+    transform: scale(1.05);
+}
+
+.image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: white;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
+
+.gallery-image:hover .image-caption {
+    transform: translateY(0);
+}
+</style>
+{% endblock %}

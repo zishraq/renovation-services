@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - Get Your Free Quote{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <h1 class="text-center mb-5">Get Your Free Quote</h1>
+    
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.name.label_tag }}
+                                {{ form.name }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.phone.label_tag }}
+                                {{ form.phone }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.service_interested.label_tag }}
+                                {{ form.service_interested }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                {{ form.property_type.label_tag }}
+                                {{ form.property_type }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                {{ form.timeline.label_tag }}
+                                {{ form.timeline }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                {{ form.budget_range.label_tag }}
+                                {{ form.budget_range }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.message.label_tag }}
+                            {{ form.message }}
+                        </div>
+                        <button type="submit" class="btn btn-warning btn-lg w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-phone fa-2x text-warning mb-3"></i>
+                    <h5>Call Us</h5>
+                    <p>(555) 123-4567</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-envelope fa-2x text-warning mb-3"></i>
+                    <h5>Email</h5>
+                    <p>info@renovatepro.com</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-clock fa-2x text-warning mb-3"></i>
+                    <h5>Hours</h5>
+                    <p>Mon-Sat: 7AM-6PM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

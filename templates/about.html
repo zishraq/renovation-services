@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Professional Renovation Services{% endblock %}
+
+{% block content %}
+<div class="about-hero">
+    <div class="container py-5 mt-5">
+        <div class="row align-items-center min-vh-50">
+            <div class="col-lg-6 text-white">
+                <h1 class="display-4 fw-bold mb-4">About RenovatePro</h1>
+                <p class="lead">With over 15 years of experience, we're your trusted partner for all renovation needs.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6 mb-4">
+            <div class="about-image-wrapper">
+                <div class="about-img-1" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <i class="fas fa-hard-hat fa-5x text-white"></i>
+                </div>
+                <div class="about-img-2" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <i class="fas fa-tools fa-5x text-white"></i>
+                </div>
+                <div class="experience-badge">
+                    <h2>15+</h2>
+                    <p>Years Experience</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h2 class="mb-4">Quality Craftsmanship You Can Trust</h2>
+            <p class="mb-4">We specialize in transforming residential and commercial spaces with precision and care. Our team of skilled professionals brings expertise in every aspect of renovation and construction.</p>
+            
+            <div class="row mb-4">
+                <div class="col-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-check-circle text-warning fa-2x me-3"></i>
+                        <div>
+                            <h5 class="mb-0">500+</h5>
+                            <small>Projects Completed</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-users text-warning fa-2x me-3"></i>
+                        <div>
+                            <h5 class="mb-0">300+</h5>
+                            <small>Happy Clients</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="{% url 'contact' %}" class="btn btn-warning btn-lg">Start Your Project</a>
+        </div>
+    </div>
+</div>
+
+<!-- Values Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Why Choose Us</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="value-card h-100">
+                    <div class="icon-wrapper mb-3">
+                        <i class="fas fa-award fa-2x"></i>
+                    </div>
+                    <h4>Licensed & Insured</h4>
+                    <p>Fully licensed professionals with comprehensive insurance coverage for your peace of mind.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="value-card h-100">
+                    <div class="icon-wrapper mb-3">
+                        <i class="fas fa-handshake fa-2x"></i>
+                    </div>
+                    <h4>Reliable Service</h4>
+                    <p>We show up on time, communicate clearly, and deliver exactly what we promise.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="value-card h-100">
+                    <div class="icon-wrapper mb-3">
+                        <i class="fas fa-star fa-2x"></i>
+                    </div>
+                    <h4>Quality Guarantee</h4>
+                    <p>We stand behind our work with a satisfaction guarantee on all services.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Expert Team</h2>
+        <div class="row g-4">
+            <div class="col-md-3 text-center">
+                <div class="team-member">
+                    <div class="team-img mx-auto mb-3" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-user-tie fa-4x text-white"></i>
+                    </div>
+                    <h5>John Smith</h5>
+                    <p class="text-muted">Founder & Lead Contractor</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="team-member">
+                    <div class="team-img mx-auto mb-3" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-user fa-4x text-white"></i>
+                    </div>
+                    <h5>Mike Johnson</h5>
+                    <p class="text-muted">Drywall Specialist</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="team-member">
+                    <div class="team-img mx-auto mb-3" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-user fa-4x text-white"></i>
+                    </div>
+                    <h5>David Lee</h5>
+                    <p class="text-muted">Framing Expert</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="team-member">
+                    <div class="team-img mx-auto mb-3" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <i class="fas fa-user fa-4x text-white"></i>
+                    </div>
+                    <h5>Tom Wilson</h5>
+                    <p class="text-muted">Painting Lead</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.about-hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 400px;
+}
+
+.about-image-wrapper {
+    position: relative;
+    height: 500px;
+}
+
+.about-img-1, .about-img-2 {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.about-img-1 {
+    top: 0;
+    left: 0;
+}
+
+.about-img-2 {
+    bottom: 0;
+    right: 0;
+}
+
+.experience-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.experience-badge h2 {
+    color: #ffc107;
+    margin: 0;
+    font-weight: bold;
+}
+
+.value-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+}
+
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ffc107 0%, #ff6b6b 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+}
+
+.team-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+{% endblock %}

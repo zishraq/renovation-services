@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Professional Renovation Services{% endblock %}
+
+{% block content %}
+<!-- Hero Section with REAL project image -->
+<section class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/media/projects/gallery/dome-ceiling.jpg') center/cover;">
+    <div class="container">
+        <div class="row align-items-center min-vh-100 pt-5">
+            <div class="col-lg-8">
+                <h1 class="display-3 fw-bold text-white mb-4">Professional Renovation & Construction</h1>
+                <p class="lead mb-4 text-white fs-4">Specializing in Drywall • Framing • Ceiling • Painting • Complete Renovations</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="{% url 'contact' %}" class="btn btn-warning btn-lg px-5">Get Free Quote</a>
+                    <a href="{% url 'gallery' %}" class="btn btn-outline-light btn-lg px-5">View Our Work</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Showcase Recent Work with REAL images -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-2">Our Recent Projects</h2>
+        <p class="text-center text-muted mb-5">Real transformations by our expert team</p>
+
+        <div class="row g-4">
+            <!-- Project 1 - Ceiling Grid -->
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card h-100">
+                    <img src="/media/projects/gallery/ceiling-grid-1.jpg" alt="Ceiling Grid Installation" class="img-fluid">
+                    <div class="project-overlay">
+                        <h5 class="text-white">Acoustical Ceiling Installation</h5>
+                        <p class="text-white-50">Commercial office space</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 - Dome Ceiling -->
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card h-100">
+                    <img src="/media/projects/gallery/dome-ceiling.jpg" alt="Custom Dome Ceiling" class="img-fluid">
+                    <div class="project-overlay">
+                        <h5 class="text-white">Custom Dome Ceiling</h5>
+                        <p class="text-white-50">Architectural specialty work</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 - Drywall & Framing -->
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card h-100">
+                    <img src="/media/projects/gallery/drywall-framing.jpg" alt="Drywall and Framing" class="img-fluid">
+                    <div class="project-overlay">
+                        <h5 class="text-white">Metal Framing & Insulation</h5>
+                        <p class="text-white-50">Complete wall systems</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 - Sports Facility -->
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card h-100">
+                    <img src="/media/projects/gallery/sports-wall.jpg" alt="Sports Facility" class="img-fluid">
+                    <div class="project-overlay">
+                        <h5 class="text-white">Sports Facility Renovation</h5>
+                        <p class="text-white-50">Custom graphics & finishes</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 - Finished Ceiling -->
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card h-100">
+                    <img src="/media/projects/gallery/finished-ceiling.jpg" alt="Finished Ceiling" class="img-fluid">
+                    <div class="project-overlay">
+                        <h5 class="text-white">Modern Ceiling Design</h5>
+                        <p class="text-white-50">Curved architectural elements</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 - Warehouse -->
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card h-100">
+                    <img src="/media/projects/gallery/warehouse-framing.jpg" alt="Warehouse Construction" class="img-fluid">
+                    <div class="project-overlay">
+                        <h5 class="text-white">Large Scale Construction</h5>
+                        <p class="text-white-50">Commercial warehouse</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{% url 'gallery' %}" class="btn btn-warning btn-lg">View Full Gallery</a>
+        </div>
+    </div>
+</section>
+
+<!-- Services with Icons -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Services</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="service-item text-center">
+                    <i class="fas fa-paint-roller fa-3x text-warning mb-3"></i>
+                    <h5>Drywall Work</h5>
+                    <p class="text-muted small">Professional finishing</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-item text-center">
+                    <i class="fas fa-hammer fa-3x text-primary mb-3"></i>
+                    <h5>Metal & Wood Framing</h5>
+                    <p class="text-muted small">Structural solutions</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-item text-center">
+                    <i class="fas fa-paint-brush fa-3x text-success mb-3"></i>
+                    <h5>Painting</h5>
+                    <p class="text-muted small">Interior & exterior</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-item text-center">
+                    <i class="fas fa-th fa-3x text-info mb-3"></i>
+                    <h5>Acoustical Ceiling</h5>
+                    <p class="text-muted small">Drop ceiling systems</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-item text-center">
+                    <i class="fas fa-house-damage fa-3x text-danger mb-3"></i>
+                    <h5>Demolition</h5>
+                    <p class="text-muted small">Safe teardown</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-item text-center">
+                    <i class="fas fa-trash-alt fa-3x text-secondary mb-3"></i>
+                    <h5>Junk Removal</h5>
+                    <p class="text-muted small">Complete cleanup</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-item text-center">
+                    <i class="fas fa-temperature-low fa-3x text-warning mb-3"></i>
+                    <h5>Insulation</h5>
+                    <p class="text-muted small">Energy efficiency</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-item text-center">
+                    <i class="fas fa-door-open fa-3x text-primary mb-3"></i>
+                    <h5>Door Installation</h5>
+                    <p class="text-muted small">Professional install</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Project Cards with Image Overlay */
+.project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    cursor: pointer;
+    height: 300px;
+}
+
+.project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.project-card:hover img {
+    transform: scale(1.1);
+}
+
+.project-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
+
+.project-card:hover .project-overlay {
+    transform: translateY(0);
+}
+
+.service-item {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+}
+</style>
+{% endblock %}
