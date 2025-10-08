@@ -22,7 +22,7 @@ COPY --chown=django:django . .
 USER django
 
 # Collect static files at build time (optional – you can also do it at runtime)
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 
 # Expose the port gunicorn will listen on
 EXPOSE 8000
