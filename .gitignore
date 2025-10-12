@@ -9,6 +9,8 @@ venv/
 env/
 ENV/
 
+random_scripts/
+
 # Django
 *.log
 *.pot
