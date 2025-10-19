@@ -134,7 +134,7 @@ class Command(BaseCommand):
             {
                 'name': 'Sarah Johnson',
                 'role': 'Property Manager',
-                'content': 'RenovatePro transformed our office space beyond expectations. Professional, on-time, and the quality is outstanding. Highly recommend!',
+                'content': '\'PROS Construction\' transformed our office space beyond expectations. Professional, on-time, and the quality is outstanding. Highly recommend!',
                 'rating': 5,
                 'service': services[0]
             },
