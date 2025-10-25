@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Hero Section with REAL project image -->
-<section class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/media/projects/gallery/dome-ceiling.jpg') center/cover;">
+<section class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{% if hero_project and hero_project.image %}{{ hero_project.image.url }}{% else %}/media/projects/gallery/dome-ceiling.jpg{% endif %}') center/cover;">
     <div class="container">
         <div class="row align-items-center min-vh-100 pt-5">
             <div class="col-lg-8">
@@ -25,117 +25,58 @@
         <h2 class="text-center mb-2">Our Recent Projects</h2>
         <p class="text-center text-muted mb-5">Real transformations by our expert team</p>
 
-{#        <div style="max-width: 900px; margin: 0 auto;">#}
-
-            <!-- Project 1 -->
+        {% for project in recent_projects %}
+            <!-- Project {{ forloop.counter }} -->
             <div class="project-card-wrapper" style="background: white; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                 <div class="row g-0">
-                    <div class="col-12 col-md-4">
-                        <img src="/media/projects/gallery/warehouse-framing-2.jpg"
-                             style="width: 100%; height: 180px; object-fit: cover; display: block;"
-                             alt="Ceiling Grid">
-                    </div>
-                    <div class="col-12 col-md-8 d-flex align-items-center">
-                        <div style="padding: 20px; width: 100%;">
-                            <h5 style="margin-bottom: 10px; color: #333;">Warehouse Framing</h5>
-                            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Commercial office space with modern grid system. Professional finish for optimal acoustics.</p>
-                            <span class="badge bg-warning text-dark">Framing</span>
+                    {% if forloop.counter|divisibleby:2 %}
+                        <!-- Even: Text left, Image right -->
+                        <div class="col-12 col-md-8 order-2 order-md-1 d-flex align-items-center">
+                            <div style="padding: 20px; width: 100%;">
+                                <h5 style="margin-bottom: 10px; color: #333;">{{ project.title }}</h5>
+                                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">{{ project.description }}</p>
+                                <span class="badge bg-{{ project.badge_color }} {% if project.badge_color == 'warning' %}text-dark{% else %}text-white{% endif %}">{{ project.badge_text }}</span>
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-12 col-md-4 order-1 order-md-2">
+                            {% if project.image %}
+                                <img src="{{ project.image.url }}"
+                                     style="width: 100%; height: 180px; object-fit: cover; display: block;"
+                                     alt="{{ project.title }}">
+                            {% else %}
+                                <div style="width: 100%; height: 180px; background: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                                    <span style="color: #6c757d;">No Image</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <!-- Odd: Image left, Text right -->
+                        <div class="col-12 col-md-4">
+                            {% if project.image %}
+                                <img src="{{ project.image.url }}"
+                                     style="width: 100%; height: 180px; object-fit: cover; display: block;"
+                                     alt="{{ project.title }}">
+                            {% else %}
+                                <div style="width: 100%; height: 180px; background: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                                    <span style="color: #6c757d;">No Image</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-8 d-flex align-items-center">
+                            <div style="padding: 20px; width: 100%;">
+                                <h5 style="margin-bottom: 10px; color: #333;">{{ project.title }}</h5>
+                                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">{{ project.description }}</p>
+                                <span class="badge bg-{{ project.badge_color }} {% if project.badge_color == 'warning' %}text-dark{% else %}text-white{% endif %}">{{ project.badge_text }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
-
-            <!-- Project 2 -->
-            <div class="project-card-wrapper" style="background: white; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div class="row g-0">
-                    <div class="col-12 col-md-8 order-2 order-md-1 d-flex align-items-center">
-                        <div style="padding: 20px; width: 100%;">
-                            <h5 style="margin-bottom: 10px; color: #333;">Custom Dome Ceiling</h5>
-                            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Architectural specialty work with curved design elements. A centerpiece that transforms any space.</p>
-                            <span class="badge bg-primary">Specialty Work</span>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 order-1 order-md-2">
-                        <img src="/media/projects/gallery/dome-ceiling.jpg"
-                             style="width: 100%; height: 180px; object-fit: cover; display: block;"
-                             alt="Dome Ceiling">
-                    </div>
-                </div>
+        {% empty %}
+            <div class="text-center py-5">
+                <p class="text-muted">No featured projects yet. Add some in the admin panel!</p>
             </div>
-
-            <!-- Project 3 -->
-            <div class="project-card-wrapper" style="background: white; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div class="row g-0">
-                    <div class="col-12 col-md-4">
-                        <img src="/media/projects/gallery/drywall-framing.jpg"
-                             style="width: 100%; height: 180px; object-fit: cover; display: block;"
-                             alt="Framing">
-                    </div>
-                    <div class="col-12 col-md-8 d-flex align-items-center">
-                        <div style="padding: 20px; width: 100%;">
-                            <h5 style="margin-bottom: 10px; color: #333;">Metal Framing & Insulation</h5>
-                            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Complete wall systems with energy-efficient insulation. Building foundations for lasting renovations.</p>
-                            <span class="badge bg-success">Framing</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 4 -->
-            <div class="project-card-wrapper" style="background: white; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div class="row g-0">
-                    <div class="col-12 col-md-8 order-2 order-md-1 d-flex align-items-center">
-                        <div style="padding: 20px; width: 100%;">
-                            <h5 style="margin-bottom: 10px; color: #333;">Sports Facility Renovation</h5>
-                            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Complete interior transformation with custom graphics. Created an inspiring athletic environment.</p>
-                            <span class="badge bg-info text-white">Renovation</span>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 order-1 order-md-2">
-                        <img src="/media/projects/gallery/sports-wall.jpg"
-                             style="width: 100%; height: 180px; object-fit: cover; display: block;"
-                             alt="Sports Facility">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 5 -->
-            <div class="project-card-wrapper" style="background: white; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div class="row g-0">
-                    <div class="col-12 col-md-4">
-                        <img src="/media/projects/gallery/finished-ceiling.jpg"
-                             style="width: 100%; height: 180px; object-fit: cover; display: block;"
-                             alt="Finished Ceiling">
-                    </div>
-                    <div class="col-12 col-md-8 d-flex align-items-center">
-                        <div style="padding: 20px; width: 100%;">
-                            <h5 style="margin-bottom: 10px; color: #333;">Modern Ceiling Design</h5>
-                            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Curved architectural elements with integrated lighting. Contemporary design meets functional excellence.</p>
-                            <span class="badge bg-secondary">Modern Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 6 -->
-            <div class="project-card-wrapper" style="background: white; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div class="row g-0">
-                    <div class="col-12 col-md-8 order-2 order-md-1 d-flex align-items-center">
-                        <div style="padding: 20px; width: 100%;">
-                            <h5 style="margin-bottom: 10px; color: #333;">Large Scale Construction</h5>
-                            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">25,000 sq ft warehouse build-out. From bare structure to functional space.</p>
-                            <span class="badge bg-danger">Commercial</span>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 order-1 order-md-2">
-                        <img src="/media/projects/gallery/warehouse-framing.jpg"
-                             style="width: 100%; height: 180px; object-fit: cover; display: block;"
-                             alt="Warehouse">
-                    </div>
-                </div>
-            </div>
-
-{#        </div>#}
+        {% endfor %}
 
         <div class="text-center mt-5">
             <a href="{% url 'gallery' %}" class="btn btn-warning btn-lg">View Full Gallery</a>

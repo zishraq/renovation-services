@@ -32,22 +32,55 @@ class Service(models.Model):
 
 
 class Project(models.Model):
+    BADGE_CHOICES = [
+        ('warning', 'Warning (Yellow)'),
+        ('primary', 'Primary (Blue)'),
+        ('success', 'Success (Green)'),
+        ('info', 'Info (Cyan)'),
+        ('danger', 'Danger (Red)'),
+        ('secondary', 'Secondary (Gray)'),
+    ]
+
     title = models.CharField(max_length=200)
     description = models.TextField()
-    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
-    before_image = models.ImageField(upload_to='projects/before/', blank=True)
-    after_image = models.ImageField(upload_to='projects/after/', blank=True)
-    location = models.CharField(max_length=100)
+    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True, blank=True)
+
+    # Single image field for gallery (you can add before/after later if needed)
+    image = models.ImageField(upload_to='projects/gallery/', help_text="Main project image", blank=True, null=True)
+
+    # Optional before/after images
+    before_image = models.ImageField(upload_to='projects/before/', blank=True, null=True)
+    after_image = models.ImageField(upload_to='projects/after/', blank=True, null=True)
+
+    location = models.CharField(max_length=100, blank=True)
     completion_date = models.DateField()
-    is_featured = models.BooleanField(default=False)
+
+    # Badge styling for homepage
+    badge_text = models.CharField(max_length=50, default="Project", help_text="Badge text (e.g., 'Framing', 'Commercial')")
+    badge_color = models.CharField(max_length=20, choices=BADGE_CHOICES, default='primary', help_text="Badge color")
+
+    # Featured on homepage
+    is_featured = models.BooleanField(default=False, help_text="Show on homepage")
+
+    # Hero section background
+    is_hero = models.BooleanField(default=False, help_text="Use as hero background image (only one should be active)")
+
+    # Display order
+    order = models.IntegerField(default=0, help_text="Display order (lower numbers first)")
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-completion_date']
+        ordering = ['order', '-completion_date']
 
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        # Ensure only one project is marked as hero
+        if self.is_hero:
+            Project.objects.filter(is_hero=True).update(is_hero=False)
+        super().save(*args, **kwargs)
 
 class ContactInquiry(models.Model):
     STATUS_CHOICES = [

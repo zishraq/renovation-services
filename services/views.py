@@ -9,10 +9,15 @@ def index(request):
     recent_projects = Project.objects.filter(is_featured=True)[:6]
     testimonials = Testimonial.objects.filter(is_active=True)[:3]
 
+    hero_project = Project.objects.filter(is_hero=True).first()
+
+    print(hero_project)
+
     context = {
         'featured_services': featured_services,
         'recent_projects': recent_projects,
         'testimonials': testimonials,
+        'hero_project': hero_project
     }
     return render(request, 'index.html', context)
 

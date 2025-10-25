@@ -3,6 +3,8 @@ from services.models import Service, Project, Testimonial
 from django.utils import timezone
 from datetime import timedelta
 import random
+import os
+from django.conf import settings
 
 
 class Command(BaseCommand):
@@ -93,48 +95,151 @@ class Command(BaseCommand):
             services.append(service)
             self.stdout.write(f'Created service: {service.name}')
 
-        # Create Projects
-        project_titles = [
-            'Modern Office Renovation',
-            'Luxury Home Remodel',
-            'Restaurant Interior Update',
-            'Medical Clinic Expansion',
-            'Retail Store Renovation',
-            'Residential Kitchen Upgrade',
-            'Commercial Space Buildout',
-            'Apartment Complex Refresh',
-            'Corporate Headquarters Update'
+        # Get list of available images
+        gallery_path = os.path.join(settings.MEDIA_ROOT, 'projects', 'gallery')
+        available_images = []
+
+        if os.path.exists(gallery_path):
+            available_images = [f for f in os.listdir(gallery_path)
+                                if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+            self.stdout.write(f'Found {len(available_images)} images in gallery')
+        else:
+            self.stdout.write(self.style.WARNING(f'Gallery path not found: {gallery_path}'))
+
+        # Create Projects with images and badge colors
+        projects_data = [
+            {
+                'title': 'Warehouse Framing Project',
+                'description': 'Commercial office space with modern grid system. Professional finish for optimal acoustics.',
+                'badge_text': 'Framing',
+                'badge_color': 'warning',
+                'image_name': 'warehouse-framing-2.jpg',
+                'is_hero': True
+            },
+            {
+                'title': 'Custom Dome Ceiling',
+                'description': 'Architectural specialty work with curved design elements. A centerpiece that transforms any space.',
+                'badge_text': 'Specialty Work',
+                'badge_color': 'primary',
+                'image_name': 'dome-ceiling.jpg'
+            },
+            {
+                'title': 'Metal Framing & Insulation',
+                'description': 'Complete wall systems with energy-efficient insulation. Building foundations for lasting renovations.',
+                'badge_text': 'Framing',
+                'badge_color': 'success',
+                'image_name': 'drywall-framing.jpg'
+            },
+            {
+                'title': 'Sports Facility Renovation',
+                'description': 'Complete interior transformation with custom graphics. Created an inspiring athletic environment.',
+                'badge_text': 'Renovation',
+                'badge_color': 'info',
+                'image_name': 'sports-wall.jpg'
+            },
+            {
+                'title': 'Modern Ceiling Design',
+                'description': 'Curved architectural elements with integrated lighting. Contemporary design meets functional excellence.',
+                'badge_text': 'Modern Design',
+                'badge_color': 'secondary',
+                'image_name': 'finished-ceiling.jpg'
+            },
+            {
+                'title': 'Large Scale Construction',
+                'description': '25,000 sq ft warehouse build-out. From bare structure to functional space.',
+                'badge_text': 'Commercial',
+                'badge_color': 'danger',
+                'image_name': 'warehouse-framing.jpg'
+            },
+            {
+                'title': 'Ceiling Grid Installation',
+                'description': 'Professional acoustical ceiling system for commercial office space.',
+                'badge_text': 'Ceiling',
+                'badge_color': 'primary',
+                'image_name': 'ceiling-grid-1.jpg'
+            },
+            {
+                'title': 'Bathroom Ceiling Work',
+                'description': 'Moisture-resistant ceiling installation with precision and care.',
+                'badge_text': 'Bathroom',
+                'badge_color': 'success',
+                'image_name': 'bathroom-ceiling.jpg'
+            },
+            {
+                'title': 'Gallery Wall Installation',
+                'description': 'Professional drywall installation and finishing for art gallery space.',
+                'badge_text': 'Gallery',
+                'badge_color': 'warning',
+                'image_name': 'gallery-wall.jpg'
+            },
+            {
+                'title': 'Hallway Renovation',
+                'description': 'Complete hallway transformation with professional finishing and paint.',
+                'badge_text': 'Renovation',
+                'badge_color': 'info',
+                'image_name': 'hallway-finished.jpg'
+            },
+            {
+                'title': 'Curved Ceiling Detail',
+                'description': 'Precision framing for curved architectural elements.',
+                'badge_text': 'Detail Work',
+                'badge_color': 'secondary',
+                'image_name': 'curved-ceiling-detail.jpg'
+            },
+            {
+                'title': 'Warehouse Partition',
+                'description': 'Commercial partition walls for warehouse separation.',
+                'badge_text': 'Commercial',
+                'badge_color': 'danger',
+                'image_name': 'warehouse-partition.jpg'
+            },
         ]
 
         locations = [
-            'Downtown Manhattan',
-            'Brooklyn Heights',
-            'Queens Plaza',
-            'Midtown East',
-            'Upper West Side',
-            'Financial District',
-            'Long Island City',
-            'Tribeca',
-            'Chelsea'
+            'Arlington, VA',
+            'Washington, DC',
+            'Alexandria, VA',
+            'Fairfax, VA',
+            'Tysons Corner, VA',
+            'Bethesda, MD',
+            'Silver Spring, MD',
+            'Rockville, MD',
+            'McLean, VA',
+            'Reston, VA',
+            'Falls Church, VA',
+            'Annandale, VA',
         ]
 
-        for i, title in enumerate(project_titles):
+        for i, proj_data in enumerate(projects_data):
+            image_path = f'projects/gallery/{proj_data["image_name"]}'
+
+            # Check if the image file exists
+            full_image_path = os.path.join(settings.MEDIA_ROOT, image_path)
+            if not os.path.exists(full_image_path):
+                self.stdout.write(self.style.WARNING(f'Image not found: {proj_data["image_name"]}'))
+                image_path = ''  # Set to empty if image doesn't exist
+
             project = Project.objects.create(
-                title=title,
-                description=f'Complete renovation including drywall, framing, and painting. This project showcased our ability to transform spaces while maintaining business operations. High-quality finishes and attention to detail throughout.',
+                title=proj_data['title'],
+                description=proj_data['description'],
                 service=random.choice(services),
                 location=locations[i % len(locations)],
                 completion_date=timezone.now().date() - timedelta(days=random.randint(30, 365)),
-                is_featured=i < 6
+                is_featured=(i < 6),  # First 6 are featured
+                badge_text=proj_data['badge_text'],
+                badge_color=proj_data['badge_color'],
+                image=image_path if image_path else '',
+                is_hero=proj_data.get('is_hero', False),
+                order=i  # Set display order
             )
-            self.stdout.write(f'Created project: {project.title}')
+            self.stdout.write(f'Created project: {project.title} with image: {proj_data["image_name"]}')
 
         # Create Testimonials
         testimonials_data = [
             {
                 'name': 'Sarah Johnson',
                 'role': 'Property Manager',
-                'content': '\'PROS Construction\' transformed our office space beyond expectations. Professional, on-time, and the quality is outstanding. Highly recommend!',
+                'content': 'PROS Construction transformed our office space beyond expectations. Professional, on-time, and the quality is outstanding. Highly recommend!',
                 'rating': 5,
                 'service': services[0]
             },
@@ -172,4 +277,4 @@ class Command(BaseCommand):
             testimonial = Testimonial.objects.create(**data)
             self.stdout.write(f'Created testimonial from: {testimonial.name}')
 
-        self.stdout.write(self.style.SUCCESS('Successfully loaded all sample data!'))
+        self.stdout.write(self.style.SUCCESS('Successfully loaded all sample data with images!'))

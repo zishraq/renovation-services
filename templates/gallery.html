@@ -4,7 +4,7 @@
 {% block title %}Gallery - Our Work Portfolio{% endblock %}
 
 {% block content %}
-<div class="gallery-header" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/media/projects/gallery/frame-construction.jpg') center/cover;">
+<div class="gallery-header" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{% if projects.first.image %}{{ projects.first.image.url }}{% else %}/static/images/default-bg.jpg{% endif %}') center/cover;">
     <div class="container py-5 mt-5 text-center text-white">
         <h1 class="display-4 fw-bold">Our Work Gallery</h1>
         <p class="lead">Real projects. Real results. Real craftsmanship.</p>
@@ -13,106 +13,33 @@
 
 <div class="container py-5">
     <div class="row g-4">
-        <!-- All your actual construction images -->
+        {% for project in projects %}
         <div class="col-md-6 col-lg-4">
             <div class="gallery-image">
-                <img src="/media/projects/gallery/warehouse-framing-2.jpg" alt="Warehouse Framing" class="img-fluid">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid">
+                {% else %}
+                    <div style="width: 100%; height: 300px; background: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: #6c757d; font-size: 18px;">No Image Available</span>
+                    </div>
+                {% endif %}
                 <div class="image-caption">
-                    <h5>Warehouse Framing</h5>
-                    <p>Warehouse Framing</p>
+                    <h5>{{ project.title }}</h5>
+                    <p>{{ project.description|truncatewords:15 }}</p>
+                    {% if project.badge_text %}
+                    <span class="badge bg-{{ project.badge_color }} {% if project.badge_color == 'warning' %}text-dark{% else %}text-white{% endif %}">
+                        {{ project.badge_text }}
+                    </span>
+                    {% endif %}
                 </div>
             </div>
         </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/ceiling-grid-1.jpg" alt="Ceiling Grid Work" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Ceiling Grid System</h5>
-                    <p>Commercial office installation</p>
-                </div>
-            </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <h3 class="text-muted">No projects yet</h3>
+            <p class="text-muted">Check back soon for our latest work!</p>
         </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/dome-ceiling.jpg" alt="Custom Dome" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Architectural Dome</h5>
-                    <p>Custom ceiling feature</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/drywall-framing.jpg" alt="Framing Work" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Metal Framing</h5>
-                    <p>With insulation</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/sports-wall.jpg" alt="Sports Facility" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Sports Complex</h5>
-                    <p>Complete renovation</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/bathroom-ceiling.jpg" alt="Bathroom Ceiling" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Bathroom Ceiling</h5>
-                    <p>Moisture-resistant installation</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/finished-ceiling.jpg" alt="Finished Ceiling" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Modern Ceiling</h5>
-                    <p>Curved design elements</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/warehouse-framing.jpg" alt="Warehouse" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Warehouse Project</h5>
-                    <p>Large scale construction</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/hallway-finished.jpg" alt="Finished Hallway" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Completed Hallway</h5>
-                    <p>Professional finish</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-            <div class="gallery-image">
-                <img src="/media/projects/gallery/curved-ceiling-detail.jpg" alt="Frame Detail" class="img-fluid">
-                <div class="image-caption">
-                    <h5>Precision Framing</h5>
-                    <p>Attention to detail</p>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 
@@ -156,6 +83,10 @@
 
 .gallery-image:hover .image-caption {
     transform: translateY(0);
+}
+
+.image-caption .badge {
+    margin-top: 10px;
 }
 </style>
 {% endblock %}
